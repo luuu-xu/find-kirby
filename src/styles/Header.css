@@ -1,0 +1,21 @@
+.header {
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px var(--greyshadow);
+}
+
+.header-logo {
+  height: 100%;
+  aspect-ratio: 1;
+}
+
+.header-title {
+  font-size: 3rem;
+  letter-spacing: .2rem;
+  color: var(--pink);
+  margin: 0;
+}

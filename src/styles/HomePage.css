@@ -1,0 +1,48 @@
+.home-page {
+  width: 70%;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-select {
+  width: 100%;
+}
+
+.game-select-header {
+  color: var(--red);
+  font-size: 1.5rem;
+}
+
+.game-select-main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.game-card {
+  width: fit-content;
+  box-shadow: 0 1px 3px var(--greyshadow);
+}
+
+.game-card-pic {
+  width: 100%;
+}
+
+.game-card-show {
+  margin: 0;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-card-show-name {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.game-card-show-difficulty {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}

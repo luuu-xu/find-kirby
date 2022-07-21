@@ -1,0 +1,28 @@
+@import url('https://fontlibrary.org//face/jellee-typeface'); 
+
+:root {
+  --pink: #ff88bd;
+  --pinkshadow: #ff96c957;
+  --blue: #2483f3;
+  --greyshadow: #cecece;
+  --darkblue: #17426f;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  font-family: 'JelleeBold', Courier, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  width: 100vw;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
