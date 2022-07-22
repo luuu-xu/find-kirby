@@ -1,8 +1,34 @@
 .game-page {
-  width: 80%;
-  min-width: 1000px;
+  height: calc(100vh - 80px);
+  width: 90%;
   display: flex;
   flex-direction: column;
+}
+
+.game-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+.game-page-header-home-link {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  transition: 0.2s;
+}
+
+.game-page-header-home-link:hover {
+  box-shadow: 0 1px 5px var(--pink);
+  background-color: var(--pink);
+  color: white;
 }
 
 .legend-main {
@@ -11,12 +37,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 50px;
 }
 
 .legend-main-title {
   font-size: 1.2rem;
   margin: 0;
+  margin-right: 24px;
 }
 
 .legend-card {
@@ -40,11 +66,20 @@
 
 .game-main {
   width: 100%;
+  height: 100%;
   margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .game-pic {
-  width: 100%;
+  object-fit: contain;
+  height: 98%;
+  min-height: 1000px;
+  width: auto;
+  max-width: 100%;
+  position: relative;
 }
 
 .click-box {
@@ -54,6 +89,8 @@
   flex-direction: column;
   border-radius: 3px;
   box-shadow: 0 1px 3px var(--greyshadow);
+  background-color: white;
+  position: absolute;
 }
 
 .click-card {
@@ -63,6 +100,13 @@
   align-items: center;
   box-shadow: 0 1px 1px var(--greyshadow);
   justify-content: flex-start;
+  transition: 0.2s;
+}
+
+.click-card:hover {
+  cursor: pointer;
+  background-color: var(--pink);
+  color: white;
 }
 
 .click-card-icon {
@@ -70,6 +114,6 @@
 }
 
 .click-card-name {
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin: 12px 0;
 }

@@ -1,5 +1,6 @@
 import '../styles/HomePage.css';
 import GAMES from "../resources/data/GAMES";
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   return (
@@ -13,18 +14,20 @@ function HomePage() {
 function GameSelect() {
   return (
     <div className="game-select">
-      <h3 className="game-select-header">Select a level</h3>
+      <h3 className="game-select-header">Select a level:</h3>
       <GameSelectMain />
     </div>
   );
 }
 
 function GameSelectMain() {
+  const games = GAMES;
+
   return (
     <div className="game-select-main">
-      {Object.keys(GAMES).map((key, index) => {
+      {Object.keys(games).map((key, index) => {
         return (
-          <GameCard game={GAMES[key]} key={index} />
+          <GameCard game={games[key]} key={index} />
         );
       })}
     </div>
@@ -32,8 +35,19 @@ function GameSelectMain() {
 }
 
 function GameCard({ game }) {
+  let navigate = useNavigate();
+
+  function handleClick(event) {
+    const gameId = event.currentTarget.id;
+    navigate(`/game/${gameId}`);
+  }
+
   return (
-    <div className="game-card">
+    <div
+      className="game-card"
+      id={game.id}
+      onClick={handleClick}
+    >
       <GameCardPic url={game.url} alt={game.name} />
       <GameCardShow name={game.name} difficulty={game.difficulty} />
     </div>

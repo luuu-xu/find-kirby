@@ -10,7 +10,6 @@
 }
 
 .game-select-header {
-  color: var(--red);
   font-size: 1.5rem;
 }
 
@@ -24,6 +23,13 @@
 .game-card {
   width: fit-content;
   box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  transition: 0.2s;
+}
+
+.game-card:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 5px black;
 }
 
 .game-card-pic {
