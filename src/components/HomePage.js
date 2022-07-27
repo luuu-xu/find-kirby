@@ -37,8 +37,8 @@ function GameSelectMain() {
 function GameCard({ game }) {
   let navigate = useNavigate();
 
-  function handleClick(event) {
-    const gameId = event.currentTarget.id;
+  function handleClick(e) {
+    const gameId = e.currentTarget.id;
     navigate(`/game/${gameId}`);
   }
 

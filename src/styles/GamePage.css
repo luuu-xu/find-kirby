@@ -55,6 +55,14 @@
   border-radius: 3px;
 }
 
+.legend-card.found {
+}
+
+.legend-card.found > .legend-name,
+.legend-card.found > .legend-icon {
+  opacity: .1;
+}
+
 .legend-icon {
   width: 40px;
 }
@@ -103,10 +111,20 @@
   transition: 0.2s;
 }
 
+.click-card.found > .click-card-icon,
+.click-card.found > .click-card-name {
+  opacity: .1;
+}
+
 .click-card:hover {
   cursor: pointer;
   background-color: var(--pink);
   color: white;
+}
+
+.click-card.found:hover {
+  cursor: not-allowed;
+  background-color: var(--greyshadow);
 }
 
 .click-card-icon {

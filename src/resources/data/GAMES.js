@@ -3,7 +3,8 @@ const GAMES = {
     id: "01", 
     name: "Underground ",
     difficulty: "Easy",
-    url: require("../images/01.png"), 
+    url: require("../images/01.png"),
+    size: [1280, 915],
     targets: 
       [
         {name: "Star Rod", url: require("../images/star-rod.png"), coordinate: [475, 670], boxSize: [50, 44]},
@@ -15,7 +16,8 @@ const GAMES = {
     id: "02", 
     name: "Apple Orchard",
     difficulty: "Medium",
-    url: require("../images/02.png"), 
+    url: require("../images/02.png"),
+    size: [1280, 912],
     targets: 
       [
         {name: "Star Rod", url: require("../images/star-rod.png"), coordinate: [913, 789], boxSize: [71, 67]},
@@ -27,7 +29,8 @@ const GAMES = {
     id: "03", 
     name: "Outer Space",
     difficulty: "Hard",
-    url: require("../images/03.png"), 
+    url: require("../images/03.png"),
+    size: [1280, 914],
     targets: 
       [
         {name: "Star Rod", url: require("../images/star-rod.png"), coordinate: [474, 33], boxSize: [45, 45]},
