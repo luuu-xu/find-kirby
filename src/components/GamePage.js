@@ -1,14 +1,33 @@
 import '../styles/GamePage.css';
 import GAMES from '../resources/data/GAMES';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import NotFound from './NotFound';
 import { dbAddGame, dbGetGame } from '../firebase/firebase';
+import Stopwatch from './Stopwatch';
 
 function GamePage() {
+  // Get game data with useParams from react-router-dom.
   let params = useParams();
   const game = GAMES[params.gameId];
 
+  // Stopwatch feature with useEffect.
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(true);
+
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 1);
+      }, 1000);
+    } else if (!running) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+
+  // Keeps track of found statuses of targets.
   const [targetsFound, setTargetsFound] = useState([false, false, false]);
 
   function handleTargetFound(index) {
@@ -23,9 +42,14 @@ function GamePage() {
   }
 
   if (game) {
-
     // Add game data to firestore.
     // dbAddGame(game);
+
+    if (targetsFound.every(e => e === true) && running) {
+      console.log("all found!");
+      console.log("time: ", time);
+      setRunning(false);
+    }
 
     return (
       <div className="game-page">
@@ -147,7 +171,8 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     const dbTargets = dbGame.targets;
     const dbClickedTargetIndex = await dbTargets.findIndex((target) => target.name === clickedCardName);
     const dbClickedTarget = dbTargets[dbClickedTargetIndex];
-    const result = await isClickedCoordinatesInside(coordinatesInPercentileOnImage, dbClickedTarget, dbGameSize);
+    const result = 
+      await isClickedCoordinatesInside(coordinatesInPercentileOnImage, dbClickedTarget, dbGameSize);
     // console.log(result);
 
     if (result) {
