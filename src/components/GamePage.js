@@ -1,10 +1,9 @@
 import '../styles/GamePage.css';
 import GAMES from '../resources/data/GAMES';
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import NotFound from './NotFound';
-import { dbAddGame, dbGetGame } from '../firebase/firebase';
-import Stopwatch from './Stopwatch';
+import { dbAddGame, dbAddUserScore, dbGetGame } from '../firebase/firebase';
 
 function GamePage() {
   // Get game data with useParams from react-router-dom.
@@ -27,7 +26,7 @@ function GamePage() {
     return () => clearInterval(interval);
   }, [running]);
 
-  // Keeps track of found statuses of targets.
+  // Keeps track of found statuses of targets with useState.
   const [targetsFound, setTargetsFound] = useState([false, false, false]);
 
   function handleTargetFound(index) {
@@ -41,20 +40,24 @@ function GamePage() {
     setTargetsFound(newTargetsFound);
   }
 
+  // Determines whether ModalBox should appear with useState.
+  const [modalOn, setModalOn] = useState(false);
+
   if (game) {
     // Add game data to firestore.
     // dbAddGame(game);
 
+    // When all targets have been found.
     if (targetsFound.every(e => e === true) && running) {
-      console.log("all found!");
-      console.log("time: ", time);
       setRunning(false);
+      setModalOn(true);
     }
 
     return (
       <div className="game-page">
         <GamePageHeader game={game} targetsFound={targetsFound} />
         <GameMain game={game} targetsFound={targetsFound} handleTargetFound={handleTargetFound} />
+        <ModalBox modalOn={modalOn} time={time} game={game} />
       </div>
     );
   } else {
@@ -246,6 +249,54 @@ function ClickCard({ target, found, handleCardClick }) {
       </p>
     </div>
   );
+}
+
+function ModalBox({ modalOn, time, game }) {
+  let navigate = useNavigate();
+
+  function handleCancel() {
+    navigate("/");
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const userName = e.target.elements.userName.value;
+    dbAddUserScore(userName, time, game);
+    navigate("/");
+  }
+  
+  if (modalOn) {
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-header">
+            You found them in <span className="pink">{time}</span> seconds!
+          </div>
+          <form className="modal-form" onSubmit={handleSubmit}>
+            <label htmlFor="userName">
+              Enter your name to be on the leaderboard: 
+              <input id="userName" type="text" name="userName" required autoComplete="name" />
+            </label>
+            <div className="modal-form-btns">
+              <button 
+                className="modal-btn-cancel"
+                type="button"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                className="modal-btn-submit"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );  
+  }
 }
 
 export default GamePage;

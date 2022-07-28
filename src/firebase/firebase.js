@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -28,7 +28,7 @@ async function dbAddGame(game) {
       size: game.size,
       targets: game.targets,
     });
-    console.log("Document written with ID: ", game.id);
+    console.log("Game data written: ", game.id);
   } catch(e) {
     console.error("Error adding document: ", e);
   }
@@ -46,4 +46,18 @@ async function dbGetGame(game) {
   }
 }
 
-export { dbAddGame, dbGetGame };
+// Add user time data to Firestore under "leaderboard" colleciton.
+async function dbAddUserScore(userName, time, game) {
+  try {
+    await addDoc(collection(db, "leaderboard", game.id, "users"), {
+      userName: userName,
+      time: time,
+      timeStamp: serverTimestamp(),
+    });
+    console.log("User score written: ", userName);
+  } catch(e) {
+    console.error("Error adding user score: ", e);
+  }
+}
+
+export { dbAddGame, dbGetGame, dbAddUserScore };
