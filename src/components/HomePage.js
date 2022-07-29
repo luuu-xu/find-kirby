@@ -35,6 +35,7 @@ function GameSelectMain() {
 }
 
 function GameCard({ game }) {
+  // Navigate to the game if GameCard is clicked.
   let navigate = useNavigate();
 
   function handleClick(e) {

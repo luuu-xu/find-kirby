@@ -65,6 +65,7 @@ function LeaderboardGameSelect({ games, handleClick, gameID }) {
 
 function GameCard({ game, handleClick, gameID }) {
   const classNames = `game-card ${game.id === gameID ? 'selected' : ''}`;
+  
   return (
     <div className={classNames} id={game.id} onClick={handleClick}>
       <GameCardPic url={game.url} alt={game.name} />

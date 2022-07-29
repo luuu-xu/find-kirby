@@ -131,10 +131,10 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
   const [clickCoordinates, setClickCoordinates] = useState([0, 0]);
   const [coordinatesInPercentileOnImage, setCoordinatesInPercentileOnImage] = useState([0, 0]);
 
+  // Check locally if the target is correctly clicked.
   function isClickedCoordinatesInside(coordinatesInPercentileOnImage, dbClickedTarget, dbGameSize) {
     const dbCoor = dbClickedTarget.coordinate;
     const dbBox = dbClickedTarget.boxSize;
-
     return coordinatesInPercentileOnImage.every((coor, i) => {
       return (
         coor >= Number((dbCoor[i] / dbGameSize[i]).toFixed(3))
@@ -144,6 +144,7 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     });
   }
 
+  // Calculate and return the clicked coordinates on image based on percentile.
   function getCoordinatesInPercentileOnImage(e) {
     const rect = e.target.getBoundingClientRect();
     const imageWidth = rect.right - rect.left;
@@ -155,6 +156,7 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     return [clickedXInPercentile, clickedYInPercentile];
   }
 
+  // Clicking anywhere on the game image sets two relevant sates.
   function handleGameClick(e) {
     if (!clickBoxIsOn) {
       const clickCoordinates = [e.clientX, e.clientY];
@@ -167,6 +169,10 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     }
   }
 
+  // Choosing one of the target cards does: 
+  // calls dbGetGame so it gets this game's targets data from Firestore, 
+  // calls isClickedCoordinatesInside to determine whether the target is hit,
+  // and updates the target found finally.
   async function handleCardClick(e) {
     const clickedCardName = e.currentTarget.id;
     const dbGame = await dbGetGame(game);
@@ -252,12 +258,15 @@ function ClickCard({ target, found, handleCardClick }) {
 }
 
 function ModalBox({ modalOn, time, game }) {
+  // Clicking on Cancel button navigates back to home page.
   let navigate = useNavigate();
 
   function handleCancel() {
     navigate("/");
   }
 
+  // Clicking Submit button calls dbAddUserScore that uploads score to Firestore,
+  // and navigate to the corresponding leaderboard.
   async function handleSubmit(e) {
     e.preventDefault();
     const userName = e.target.elements.userName.value;
