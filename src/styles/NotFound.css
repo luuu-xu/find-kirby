@@ -1,0 +1,29 @@
+.notfound-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notfound-h3 {
+  font-size: 2rem;
+}
+
+.notfound-link {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--pink);
+  background-color: white;
+  box-shadow: 0 1px 3px var(--greyshadow);
+  transition: 0.2s;
+}
+
+.notfound-link:hover {
+  box-shadow: 0 1px 5px var(--pink);
+  background-color: var(--pink);
+  color: white;
+}

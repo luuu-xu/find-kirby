@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
+import "../styles/NotFound.css";
 
 function NotFound() {
-  const styles = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  }
   return (
-    <div style={styles}>
-      <h3>Nothing here!</h3>
-      <Link to="/">Home</Link>
+    <div className="notfound-page">
+      <h3 className="notfound-h3">Nothing here!</h3>
+      <Link to="/" className="notfound-link">Home</Link>
     </div>
   );
 }
