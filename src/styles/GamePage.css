@@ -80,8 +80,8 @@
 
 .game-pic {
   object-fit: contain;
-  height: 98%;
-  min-height: 1000px;
+  /* height: 98%;
+  min-height: 1000px; */
   width: auto;
   max-width: 100%;
   position: relative;

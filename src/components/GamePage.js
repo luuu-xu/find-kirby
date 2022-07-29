@@ -149,10 +149,13 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     const rect = e.target.getBoundingClientRect();
     const imageWidth = rect.right - rect.left;
     const imageHeight = rect.bottom - rect.top;
+    // console.log("image dimensions: ", imageWidth, imageHeight);
     const clickedX = e.clientX - rect.left;
     const clickedY = e.clientY - rect.top;
+    // console.log("clicked coors: ", clickedX, clickedY);
     const clickedXInPercentile = Number((clickedX / imageWidth).toFixed(3));
     const clickedYInPercentile = Number((clickedY / imageHeight).toFixed(3));
+    // console.log("clicked coor in percent: ", clickedXInPercentile, clickedYInPercentile);
     return [clickedXInPercentile, clickedYInPercentile];
   }
 
@@ -184,6 +187,7 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     const result = 
       await isClickedCoordinatesInside(coordinatesInPercentileOnImage, dbClickedTarget, dbGameSize);
 
+    console.log(result);
     if (result) {
       handleTargetFound(dbClickedTargetIndex);
     }
