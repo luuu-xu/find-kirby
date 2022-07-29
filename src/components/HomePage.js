@@ -1,12 +1,12 @@
 import '../styles/HomePage.css';
 import GAMES from "../resources/data/GAMES";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function HomePage() {
   return (
     <main className="home-page">
       <GameSelect />
-      <LeaderboardMain />
+      <LeaderboardBanner />
     </main>
   );
 }
@@ -14,7 +14,7 @@ function HomePage() {
 function GameSelect() {
   return (
     <div className="game-select">
-      <h3 className="game-select-header">Select a level:</h3>
+      <h3 className="game-select-header">Select a level</h3>
       <GameSelectMain />
     </div>
   );
@@ -38,8 +38,8 @@ function GameCard({ game }) {
   let navigate = useNavigate();
 
   function handleClick(e) {
-    const gameId = e.currentTarget.id;
-    navigate(`/game/${gameId}`);
+    const gameID = e.currentTarget.id;
+    navigate(`/game/${gameID}`);
   }
 
   return (
@@ -66,15 +66,21 @@ function GameCardShow({ name, difficulty }) {
       <p className="game-card-show-name">{name}</p>
       <p className="game-card-show-difficulty">{difficulty}</p>
     </div>
-  )
+  );
 }
 
-function LeaderboardMain() {
+function LeaderboardBanner() {
   return (
-    <div>
-
+    <div className='leaderboard-banner'>
+      <p>Check out the leaderboard!</p>
+      <Link 
+        to="/leaderboard/01"
+        className='leaderboard-banner-link'
+      >
+        Leaderboard
+      </Link>
     </div>
-  )
+  );
 }
 
 export default HomePage;

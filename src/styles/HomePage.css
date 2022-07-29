@@ -10,7 +10,7 @@
 }
 
 .game-select-header {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .game-select-main {
@@ -51,4 +51,41 @@
 .game-card-show-difficulty {
   font-size: 1.2rem;
   margin: 1rem 0;
+}
+
+.leaderboard-banner {
+  margin-top: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--pinkshadow);
+  box-shadow: 0 1px 5px var(--pinkshadow);
+  border-radius: 3px;
+  padding: 48px;
+}
+
+.leaderboard-banner > p {
+  margin: 0;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.leaderboard-banner-link {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: var(--pink);
+  background-color: white;
+  transition: 0.2s;
+}
+
+.leaderboard-banner-link:hover {
+  box-shadow: 0 1px 5px var(--pink);
+  background-color: var(--pink);
+  color: white;
 }

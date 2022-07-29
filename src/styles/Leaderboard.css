@@ -1,0 +1,142 @@
+.leaderboard-page {
+  width: 70%;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leaderboard-h3 {
+  font-size: 2rem;
+}
+
+.leaderboard-header-home-link {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  /* color: black; */
+  color: var(--pink);
+  background-color: white;
+  transition: 0.2s;
+}
+
+.leaderboard-header-home-link:hover {
+  box-shadow: 0 1px 5px var(--pink);
+  background-color: var(--pink);
+  color: white;
+}
+
+.leaderboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.leaderboard-game-select {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.game-card {
+  width: fit-content;
+  box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  transition: 0.2s;
+}
+
+.game-card:hover {
+  cursor: pointer;
+  box-shadow: 0 1px 5px black;
+}
+
+.game-card.selected {
+  background-color: var(--pinkshadow);
+  box-shadow: 0 1px 5px var(--pinkshadow);
+  color: white;
+}
+
+.game-card.selected:hover {
+  box-shadow: 0 1px 5px var(--pinkshadow);
+}
+
+.game-card-pic {
+  width: 100%;
+}
+
+.game-card-show {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-card-show > p {
+  margin: 0;
+}
+
+.game-card-show-link {
+  padding: .5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background-color: white;
+  color: var(--pink);
+  box-shadow: 0 1px 3px white;
+  transition: 0.2s;
+}
+
+.game-card-show-link:hover {
+  box-shadow: 0 1px 3px var(--pink);
+  background-color: white;
+  color: white;
+  background-color: var(--pink);
+}
+
+.leaderboard-table {
+  box-shadow: 0 1px 3px var(--greyshadow);
+  border-radius: 3px;
+  border: 1px solid var(--greyshadow);
+  border-spacing: 0;
+}
+
+thead {
+  background-color: var(--pinkshadow);
+  color: white;
+}
+
+tr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+tr:nth-child(even) {
+  background-color: #cecece70;;
+}
+
+th,
+td {
+  font-size: 1.2rem;
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+td {
+  font-size: 1rem;
+}

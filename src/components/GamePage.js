@@ -18,15 +18,15 @@ function GamePage() {
     let interval;
     if (running) {
       interval = setInterval(() => {
-        setTime(prevTime => prevTime + 1);
-      }, 1000);
+        setTime(prevTime => Number((prevTime + 0.01).toFixed(2)));
+      }, 10);
     } else if (!running) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
   }, [running]);
 
-  // Keeps track of found statuses of targets with useState.
+  // Keeps track of targets found statuses of targets with useState.
   const [targetsFound, setTargetsFound] = useState([false, false, false]);
 
   function handleTargetFound(index) {
@@ -172,11 +172,11 @@ function GamePic({ game, targetsFound, handleTargetFound }) {
     const dbGame = await dbGetGame(game);
     const dbGameSize = dbGame.size;
     const dbTargets = dbGame.targets;
-    const dbClickedTargetIndex = await dbTargets.findIndex((target) => target.name === clickedCardName);
+    const dbClickedTargetIndex = 
+      await dbTargets.findIndex((target) => target.name === clickedCardName);
     const dbClickedTarget = dbTargets[dbClickedTargetIndex];
     const result = 
       await isClickedCoordinatesInside(coordinatesInPercentileOnImage, dbClickedTarget, dbGameSize);
-    // console.log(result);
 
     if (result) {
       handleTargetFound(dbClickedTargetIndex);
@@ -258,11 +258,12 @@ function ModalBox({ modalOn, time, game }) {
     navigate("/");
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const userName = e.target.elements.userName.value;
-    dbAddUserScore(userName, time, game);
-    navigate("/");
+    const gameID = game.id;
+    await dbAddUserScore(userName, time, gameID);
+    navigate(`/leaderboard/${gameID}`);
   }
   
   if (modalOn) {
@@ -275,7 +276,7 @@ function ModalBox({ modalOn, time, game }) {
           <form className="modal-form" onSubmit={handleSubmit}>
             <label htmlFor="userName">
               Enter your name to be on the leaderboard: 
-              <input id="userName" type="text" name="userName" required autoComplete="name" />
+              <input id="userName" type="text" name="userName" required autoComplete="name" autoFocus/>
             </label>
             <div className="modal-form-btns">
               <button 

@@ -5,6 +5,7 @@ import HomePage from './components/HomePage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GamePage from './components/GamePage';
 import NotFound from './components/NotFound';
+import LeaderboardPage from './components/Leaderboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,9 @@ root.render(
           <Route path='home' element={<HomePage />} />
           <Route path='game' element={<GamePage />}>
             <Route path=':gameId' element={<GamePage />} />
+          </Route>
+          <Route path='leaderboard' element={<LeaderboardPage />}>
+            <Route path=':gameID' element={<LeaderboardPage />} />
           </Route>
           <Route path='*' element={<NotFound />} />
         </Route>

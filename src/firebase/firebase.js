@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, getDoc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, orderBy, serverTimestamp, setDoc, query } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -39,7 +39,6 @@ async function dbGetGame(game) {
   const docRef = doc(db, "games", game.id);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
-    // console.log("Document data: ", docSnap.data());
     return docSnap.data();
   } else {
     console.log("No such document!");
@@ -47,9 +46,9 @@ async function dbGetGame(game) {
 }
 
 // Add user time data to Firestore under "leaderboard" colleciton.
-async function dbAddUserScore(userName, time, game) {
+async function dbAddUserScore(userName, time, gameID) {
   try {
-    await addDoc(collection(db, "leaderboard", game.id, "users"), {
+    await addDoc(collection(db, "leaderboard", gameID, "scores"), {
       userName: userName,
       time: time,
       timeStamp: serverTimestamp(),
@@ -60,4 +59,13 @@ async function dbAddUserScore(userName, time, game) {
   }
 }
 
-export { dbAddGame, dbGetGame, dbAddUserScore };
+// Retrieve specific game's user scores data from Firestore.
+async function dbGetGameScores(gameID) {
+  const scoresRef = collection(db, "leaderboard", gameID, "scores");
+  const q = query(scoresRef, orderBy("time"));
+  const querySnapshot = await getDocs(q);
+  // console.log(querySnapshot);
+  return querySnapshot;
+}
+
+export { dbAddGame, dbGetGame, dbAddUserScore, dbGetGameScores };
