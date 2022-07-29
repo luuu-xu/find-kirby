@@ -83,12 +83,12 @@ function GameCardPic({ url, alt }) {
 function GameCardShow({ game, gameID }) {
   return (
     <div className="game-card-show">
-      <p>{game.name}</p>
+      {/* <p>{game.name}</p> */}
       {game.id === gameID 
       ? 
       <Link to={`/game/${gameID}`} className="game-card-show-link">Play</Link> 
       : 
-      ''
+      <p>{game.name}</p>
       }
     </div>
   );
