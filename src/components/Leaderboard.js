@@ -2,7 +2,7 @@ import "../styles/Leaderboard.css";
 import GAMES from "../resources/data/GAMES";
 import { dbGetGameScores } from "../firebase/firebase";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function LeaderboardPage() {
   return (
@@ -26,12 +26,14 @@ function LeaderboardMain() {
   const games = GAMES;
 
   let params = useParams();
+  let navigate = useNavigate();
   
   // Change to game leaderboard with useState.
   const [gameID, setGameID] = useState(params.gameID || '01');
   function handleClick(e) {
     const gameID = e.currentTarget.id;
     setGameID(gameID);
+    navigate(`/leaderboard/${gameID}`);
   }
 
   return (
@@ -64,7 +66,7 @@ function LeaderboardGameSelect({ games, handleClick, gameID }) {
 }
 
 function GameCard({ game, handleClick, gameID }) {
-  const classNames = `game-card ${game.id === gameID ? 'selected' : ''}`;
+  const classNames = `game-card ${Number(game.id) === Number(gameID) ? 'selected' : ''}`;
   
   return (
     <div className={classNames} id={game.id} onClick={handleClick}>
@@ -86,7 +88,13 @@ function GameCardShow({ game, gameID }) {
       {/* <p>{game.name}</p> */}
       {game.id === gameID 
       ? 
-      <Link to={`/game/${gameID}`} className="game-card-show-link">Play</Link> 
+      <Link 
+        to={`/game/${gameID}`}
+        className="game-card-show-link"
+        onClick={(e) => e.stopPropagation()}
+      >
+        Play
+      </Link> 
       : 
       <p>{game.name}</p>
       }
